@@ -1,0 +1,16 @@
+<div sg-container="1">
+  <sg>
+    <button nz-button (click)="add()" [nzType]="'dashed'" class="ant-btn__block mb-sm">
+    <i class="anticon anticon-plus"></i>
+    <span>添加</span>
+  </button>
+    <st [ps]="5" [pi]="1" [columns]="columns" [data]="dataSet" [loading]="loading" (rowClick)="rowClick($event)" (change)="change($event)"></st>
+  </sg>
+  <sg>
+    <button nz-button (click)="addPCT()" [nzType]="'dashed'" class="ant-btn__block mb-sm">
+    <i class="anticon anticon-plus"></i>
+    <span>添加</span>
+  </button>
+    <st [ps]="5" [pi]="1" [columns]="columnsPCT" [data]="dataSetPCT" [loading]="loadingPCT"></st>
+  </sg>
+</div>

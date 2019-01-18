@@ -1,0 +1,76 @@
+<div class="modal-header">
+  <div class="modal-title">{{i.id > 0 ? '编辑' : '添加'}}-项目</div>
+</div>
+<form  #f="ngForm" (ngSubmit)="save()" nz-form>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">编号</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input [(ngModel)]="i.code" name="code" maxlength="30" required />
+    </nz-form-control>
+    <nz-form-label nzSpan="4">项目名称</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input  [(ngModel)]="i.name" name="name" required />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">项目状态</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <ng-select2 nzSpan="8" (projectStatusId)="getStatusId($event)" [innerValue]="i.projectStatusId"></ng-select2>
+    </nz-form-control>
+    <nz-form-label nzSpan="4">项目类型</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <ng-select3 nzSpan="8" (projectTypeId)="getTypeId($event)"  [innerValue]="i.projectTypeId"></ng-select3>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">项目阶段</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <ng-select4 (projectStageId)="getStageId($event)" [innerValue]="i.projectStageId" ></ng-select4>
+    </nz-form-control>
+    <nz-form-label nzSpan="4">投资主体</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <ng-select5 (projectInvestMainId)="getInvestMainId($event)" [innerValue]="i.projectInvestMainId" ></ng-select5>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">积分</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input [(ngModel)]="i.gongfen" name="gongfen"  required />
+    </nz-form-control>
+    <nz-form-label nzSpan="4">Defect积分</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input [(ngModel)]="i.gongfenEachDefect" name="gongfenEachDefect"  required />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">REQ积分</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input [(ngModel)]="i.gongfenEachReq" name="gongfenEachReq" placeholder="200字以内" />
+    </nz-form-control>
+    <nz-form-label nzSpan="4">开始时间</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <nz-date-picker [nzFormat]="fomrmat"  (ngModelChange)="onChange($event)"
+                      style="width: 100%" [(ngModel)]="i.startTime._i" name="startTime" (ngModelChange)="onChange($event)" ></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">结束时间</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <nz-date-picker [nzFormat]="fomrmat" [(ngModel)]="i.endTime._i" name="endTime" (ngModelChange)="onChange1($event)"  ></nz-date-picker>
+    </nz-form-control>
+    <nz-form-label nzSpan="4">计划结束时间</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <nz-date-picker [nzFormat]="fomrmat" [(ngModel)]="i.planEndTime._i" name="planEndTime" (ngModelChange)="onChange2($event)" ></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">简介</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input [(ngModel)]="i.remarks" name="remarks" placeholder="描述" required/>
+    </nz-form-control>
+  </nz-form-item>
+  <div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button [disabled]="!f.form.valid || !f.form.dirty" [nzLoading]="http.loading" [nzType]="'primary'">保存</button>
+  </div>
+</form>

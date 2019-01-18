@@ -1,0 +1,81 @@
+<div class="modal-header">
+  <div class="modal-title">发布公告</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Code</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="code" placeholder="Code">
+      <nz-form-explain *ngIf="validateForm.get('code').dirty && validateForm.get('code').hasError('required')">
+        Please input your code!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>versionName</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="versionName" placeholder="versionName">
+      <nz-form-explain *ngIf="validateForm.get('versionName').dirty && validateForm.get('versionName').hasError('required')">Please input your versionName!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>level</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="level" placeholder="level">
+      <nz-form-explain *ngIf="validateForm.get('level').dirty && validateForm.get('level').hasError('required')">
+        Please input your level!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>level1</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="level1" placeholder="level1">
+      <nz-form-explain *ngIf="validateForm.get('level1').dirty && validateForm.get('level1').hasError('required')">
+        Please input your level1!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>level2</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="level2" placeholder="level2">
+      <nz-form-explain *ngIf="validateForm.get('level2').dirty && validateForm.get('level2').hasError('required')">
+        Please input your level2!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>level3</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="level3" placeholder="level3">
+      <nz-form-explain *ngIf="validateForm.get('level3').dirty && validateForm.get('level3').hasError('required')">
+        Please input your level3!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>level4</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="level4" placeholder="level4">
+      <nz-form-explain *ngIf="validateForm.get('level4').dirty && validateForm.get('level4').hasError('required')">
+        Please input your level4!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+<nz-form-item>
+  <nz-form-label [nzSpan]="7" nzRequired>Remarks</nz-form-label>
+  <nz-form-control [nzSpan]="12" nzHasFeedback>
+   <textarea formControlName="remarks" nz-input rows="2" placeholder="Remarks"></textarea>
+   <nz-form-explain *ngIf="validateForm.get('remarks').dirty && validateForm.get('remarks').hasError('required')">
+    Please input your remarks!
+  </nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!validateForm.valid || !validateForm.dirty" [nzType]="'primary'">保存</button>
+</div>
+</form>

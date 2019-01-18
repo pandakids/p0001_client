@@ -1,0 +1,30 @@
+<div class="content__title">
+  <h1>项目列表
+    <small>主要用于管理项目（平台管理员）。</small>
+  </h1>
+  <button nz-button (click)="add()" [nzType]="'primary'">添加</button>
+</div>
+<form nz-form [nzLayout]="'inline'" (ngSubmit)="queryData()"  class="search-form">
+  <nz-form-item>
+    <nz-form-control style="width:100px">
+      <ng-select2 (projectStatusId)="getStatusId($event)" ></ng-select2>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <input nz-input [(ngModel)]="query.projectCode" name="projectCode" placeholder="项目编号">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <input nz-input [(ngModel)]="query.projectName" name="q" placeholder="项目名称">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button >搜索</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<st #st class="simple-table" [ps]="10" [pi]="1" [columns]="columns" [data]="datalists">
+</st>

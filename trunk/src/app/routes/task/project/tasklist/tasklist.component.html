@@ -1,0 +1,84 @@
+<page-header></page-header>
+<nz-card [nzBordered]="false">
+  <div nz-row>
+    <div nz-col [nzXs]="24" [nzSm]="8" class="header-info">
+      <span class="text-grey-dark">我的待办任务/完成任务总数</span>
+      <span class="d-block display-2">? / ?</span>
+      <em></em>
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="8" class="header-info">
+      <span class="text-grey-dark">共获得金额/工分</span>
+      <span class="d-block display-2">￥200??/12??工分</span>
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="8" class="header-info">
+      <span class="text-grey-dark">预计获得</span>
+      <span class="d-block display-2">￥120???</span>
+    </div>
+  </div>
+</nz-card>
+<nz-card [nzBordered]="false">
+  <div class="d-flex align-items-center mb-lg">
+    <h3 class="flex-1 text-lg">我的任务</h3>
+    <div>
+      <nz-radio-group [(ngModel)]="q.status" class="mr-md">
+        <label nz-radio-button [nzValue]="'all'">
+          <span>全部</span>
+        </label>
+        <label nz-radio-button [nzValue]="'progress'">
+          <span>进行中</span>
+        </label>
+        <label nz-radio-button [nzValue]="'progress'">
+          <span>已完成</span>
+        </label>
+        <label nz-radio-button [nzValue]="'waiting'">
+          <span>等待中</span>
+        </label>
+      </nz-radio-group>
+      <nz-input-group nzSuffixIcon="anticon anticon-search" style="width: 270px;">
+        <input type="text" nz-input placeholder="请输入" [(ngModel)]="q.q" name="q">
+      </nz-input-group>
+    </div>
+  </div>
+
+  <nz-list [nzDataSource]="taskListData" [nzRenderItem]="item" [nzPagination]="pagination">
+    <ng-template #item let-item>
+      <nz-list-item [nzContent]="nzContent" [nzActions]="[edit,defect]">
+        <ng-template #edit>
+          <a (click)="editTask(item.id)">编辑</a>
+        </ng-template>
+        <ng-template #defect>
+          <a (click)="showDefects(item)">defect</a>
+        </ng-template>
+
+        <nz-list-item-meta [nzTitle]="nzTitle" [nzDescription]="item.remarks" [nzAvatar]="item.logo">
+          <ng-template #nzTitle>
+            <a href="{{item.href}}" target="_blank">{{item.name}}</a>
+          </ng-template>
+          <ng-template #nzAvatar>
+            <nz-avatar [nzSrc]="avatar" nzSize="large" [nzShape]="'square'"></nz-avatar>
+          </ng-template>
+        </nz-list-item-meta>
+
+        <ng-template #nzContent>
+          <div class="width-md">
+            <div class="d-flex text-grey-dark">
+              <div class="flex-1">
+                Owner
+                <p>{{item.owner}}</p>
+              </div>
+              <div class="text-right">
+                开始时间
+                <p>{{item.creationTime | _date}}</p>
+              </div>
+            </div>
+            <nz-progress [nzPercent]="item.taskLeftTimePercent" [nzStatus]="item.projectTaskStatus" [nzStrokeWidth]="6"></nz-progress>
+          </div>
+        </ng-template>
+      </nz-list-item>
+    </ng-template>
+
+    <ng-template #pagination>
+      <nz-pagination [nzTotal]="totalCount" [nzPageSize]="query.maxResultCount" (nzPageIndexChange)="onChangePage()"></nz-pagination>
+    </ng-template>
+  </nz-list>
+</nz-card>

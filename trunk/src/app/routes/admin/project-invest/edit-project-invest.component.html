@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <div class="modal-title">添加或编辑</div>
+</div>
+<form nz-form [formGroup]="investForm" (ngSubmit)="onSubmit()">
+  <nz-form-item>
+  <nz-form-label nzXs="24" nzSm="7" nzRequired nzFor="code">编号</nz-form-label>
+  <nz-form-control nzXs="24" nzSm="12" nzMd="10">
+    <input nz-input formControlName="code" [(ngModel)]="inputData.code" placeholder="编号">
+    <nz-form-explain *ngIf="investForm.get('code').dirty && investForm.get('code').errors">请输入编号</nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzXs="24" nzSm="7" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-control nzXs="24" nzSm="12" nzMd="10">
+        <input nz-input formControlName="name" [(ngModel)]="inputData.name" placeholder="名称">
+        <nz-form-explain *ngIf="investForm.get('name').dirty && investForm.get('name').errors">请输入名称</nz-form-explain>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+  <nz-form-label nzXs="24" nzSm="7" nzFor="prjType">项目类型</nz-form-label>
+  <nz-form-control nzXs="24" nzSm="12" nzMd="10">
+    <nz-select formControlName="prjType" [(ngModel)]="inputData.projectTypeId">
+        <nz-option *ngFor="let type of types" [nzLabel]="type.name" [nzValue]="type.id">
+        </nz-option>
+    </nz-select>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button type="submit" [disabled]="investForm.invalid" [nzType]="'primary'">保存</button>
+</div>
+</form>
+
