@@ -20,8 +20,8 @@
         <li nz-menu-item (click)="CreateProjectCost()">添加项目支出</li>
       </ul>
     </nz-dropdown>
-    <button nz-button [nzType]="'primary'" (click)="addTask()">+任务</button>
-    <button nz-button [nzType]="'primary'" (click)="addDefect()">+Bug</button>
+    <button acl [acl-ability]="'Pages.Tenant.TaskSystem.ProjectMain.Create'" nz-button [nzType]="'primary'" (click)="addTask()">+任务</button>
+    <button acl [acl-ability]="'Pages.Tenant.TaskSystem.ProjectTaskDefect.Create'" nz-button [nzType]="'primary'" (click)="addDefect()">+Bug</button>
   </ng-template>
   <ng-template #extra>
     <div nz-row>

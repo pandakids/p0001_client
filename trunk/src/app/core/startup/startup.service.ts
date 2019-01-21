@@ -12,9 +12,12 @@ import {
 import { ACLService } from '@delon/acl';
 import { TranslateService } from '@ngx-translate/core';
 import { I18NService } from '../i18n/i18n.service';
-import { PermissionCheckerService } from 'abp-ng2-module/dist/src/auth/permission-checker.service';
-import * as Contants from '../../common/Contants';
-import {  _HttpClient } from '@delon/theme';
+import { AbpACLService } from '../abp-acl.service';
+
+//import {  _HttpClient } from '@delon/theme';
+//import * as Contants from '../../common/Contants';
+
+
 /**
  * 用于应用启动时
  * 一般用来获取应用所需要的基础数据等
@@ -30,8 +33,9 @@ export class StartupService {
     private titleService: TitleService,
     private httpClient: HttpClient,
     private injector: Injector,
-    private permission: PermissionCheckerService,
-    private http: _HttpClient
+    private abpACLService: AbpACLService
+    //private http: _HttpClient
+
   ) {}
 
   load(): Promise<any> {
@@ -62,44 +66,33 @@ export class StartupService {
             // 用户信息：包括姓名、头像、邮箱地址
             this.settingService.setUser(res.user);
             // ACL：设置权限为全量
-            this.aclService.setFull(true);
-
-            this.http.get(Contants.API.SERVER_URL +'/AbpUserConfiguration/GetAll')
-          .subscribe (
-            (response:any)=>{
-               console.log(response);
-               $.extend(true, abp, response.result);
-                           // 初始化菜单
-            res.menu.forEach((item)=>{
-              this.checkChildMenuItemPermission(item);
-            });
+            this.aclService.setFull(false);
             this.menuService.add(res.menu);
-              resolve(null);
-              });
-
             // 设置页面标题的后缀
             this.titleService.suffix = res.app.name;
+
+          //     this.http.get(Contants.API.SERVER_URL +'/AbpUserConfiguration/GetAll')
+          // .subscribe (
+          //   (response:any)=>{
+          //      $.extend(true, abp, response.result);
+          //      //this.aclService.setAbility(Object.getOwnPropertyNames(abp.auth.allPermissions));
+          //     // 初始化菜单
+          //   // res.menu.forEach((item)=>{
+          //   //   this.checkChildMenuItemPermission(item);
+          //   // });
+          //   // this.menuService.add(res.menu);
+          //   //   resolve(null);
+          //    });
+
+          this.abpACLService.initACL();
+
           },
           () => {},
           () => {
-            //resolve(null);
+            resolve(null);
           },
         );
     });
   }
-
-  checkChildMenuItemPermission(menuItem) {
-
-        for (let i = 0; i < menuItem.children.length; i++) {
-            let subMenuItem = menuItem.children[i];
-            console.log(this.permission.isGranted(subMenuItem.permissionName));
-            subMenuItem.hide = !subMenuItem.permissionName || !this.permission.isGranted(subMenuItem.permissionName);
-            if (subMenuItem.children && subMenuItem.children.length) {
-                this.checkChildMenuItemPermission(subMenuItem);
-            } else if (!subMenuItem.permissionName) {
-              subMenuItem.hide = true;
-            }
-        }
-    }
 
 }

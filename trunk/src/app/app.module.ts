@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { RoutesModule } from './routes/routes.module';
 import { LayoutModule } from './layout/layout.module';
 import { StartupService } from '@core/startup/startup.service';
+import { AbpACLService } from '@core/abp-acl.service';
 import { DefaultInterceptor } from '@core/net/default.interceptor';
 import { SimpleInterceptor } from '@delon/auth';
 // angular i18n
@@ -102,6 +103,7 @@ export function getRemoteServiceBaseUrl(): string {
       deps: [StartupService],
       multi: true,
     },
+    AbpACLService
   ],
   bootstrap: [AppComponent],
   entryComponents:[]
