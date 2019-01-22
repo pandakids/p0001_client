@@ -123,6 +123,9 @@ export class UserLoginComponent extends ComponentBase implements OnDestroy {
           name: this.userName.value,
           userId: response.result.userId
         });
+        let user = this.settingsService.user;
+        user.name = this.userName.value;
+        this.settingsService.setUser(user);
 
         // 清空路由复用信息
         this.reuseTabService.clear();

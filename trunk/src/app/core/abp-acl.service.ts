@@ -21,7 +21,8 @@ export class AbpACLService {
     .subscribe (
       (response:any)=>{
           $.extend(true, abp, response.result);
-          this.aclService.setAbility(Object.getOwnPropertyNames(abp.auth.allPermissions));
+          
+          this.aclService.setAbility(Object.getOwnPropertyNames(abp.auth.grantedPermissions));
         // 初始化菜单
         let menus = this.menuService.menus;
         menus.forEach((item)=>{
