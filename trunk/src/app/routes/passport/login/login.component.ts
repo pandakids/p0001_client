@@ -130,22 +130,24 @@ export class UserLoginComponent extends ComponentBase implements OnDestroy {
         // 清空路由复用信息
         this.reuseTabService.clear();
         // 重新获取 StartupService 内容，若其包括 User 有关的信息的话
-        this.startupSrv.load().then(() =>
-        {
+        this.startupSrv.load().then(() =>{
           if(response.result && response.result.requiresVerification){
             this.router.navigate(['/task/user/stepregister'])
           }
           else {
             this.router.navigate(['/'])
           }
-        }
-        );
+          this.loading = false;
+        },(reason)=>{
+          this.loading = false;
+        });
 
-      }, error => {
-        this.error = `账户或密码错误`;
+      }, (error) => {
+        if (error&&error.error&&error.error.error)
+        this.error = error.error.error.details;
         this.loading = false;
         return;
-      },()=>{this.loading = false;});
+      });
 
 
 
