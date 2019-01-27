@@ -122,23 +122,24 @@ export class DefaultInterceptor implements HttpInterceptor {
             '未可知错误，大部分是由于后端不支持CORS或无效配置引起',
             event,
           );
-          if (event.error&&event.error.error){
-            let error = '';
-            if(event.error.error.message) {
-              error+=event.error.error.message;
-            }
-            if(event.error.error.details) {
-              error+=event.error.error.details;
-            }
-            if (error){
-              this.msg.error(error, { nzDuration: 8000 });
-            }
+          // if (event.error&&event.error.error){
+          //   let error = '';
+          //   if(event.error.error.message) {
+          //     error+=event.error.error.message;
+          //   }
+          //   if(event.error.error.details) {
+          //     error+=event.error.error.details;
+          //   }
+          //   if (error){
+          //     this.msg.error(error, { nzDuration: 8000 });
+          //   }
 
-          } else {
-             this.msg.error(event.message);
-          }
-          
+          // } else {
+          //    this.msg.error(event.message);
+          // }
         }
+        return throwError(event);
+
         break;
     }
     return of(event);

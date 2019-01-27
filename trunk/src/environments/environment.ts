@@ -4,7 +4,7 @@
 
 export const environment = {
   //SERVER_URL: `http://localhost:22742/api/`,
-  SERVER_URL: `http://203.195.207.50:5010/api/`,
+  SERVER_URL: `http://203.195.207.50:5000/api/`,
   production: false,
   useHash: true,
   hmr: false,

@@ -16,12 +16,13 @@ export class AbpACLService {
     private http: _HttpClient
   ) {}
 
-  initACL() {
+  initACL(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
     this.http.get(Contants.API.SERVER_URL +'/AbpUserConfiguration/GetAll')
-    .subscribe (
-      (response:any)=>{
+    .subscribe ((response:any)=>{
           $.extend(true, abp, response.result);
-          this.aclService.setAbility(Object.getOwnPropertyNames(abp.auth.allPermissions));
+          
+          this.aclService.setAbility(Object.getOwnPropertyNames(abp.auth.grantedPermissions));
         // 初始化菜单
         let menus = this.menuService.menus;
         menus.forEach((item)=>{
@@ -29,7 +30,14 @@ export class AbpACLService {
         });
         this.menuService.clear();
         this.menuService.add(menus);
+        resolve(true);
+        },
+        error=>{
+          resolve(true);
         });
+    });
+
+    
   }
 
   private checkMenuItemPermission(menuItem) {
