@@ -73,7 +73,7 @@
           <prj-task [prjId]="prjId" #prjTask></prj-task>
       </nz-tab>
         <nz-tab (nzClick)="prjDefectSelected()" nzTitle="项目defect">
-            <prj-defect #prjDefect></prj-defect>
+            <prj-defect [prjId]="prjId" #prjDefect></prj-defect>
         </nz-tab>
       <nz-tab nzTitle="项目资产策略">
         <prj-asset-strategy></prj-asset-strategy>
