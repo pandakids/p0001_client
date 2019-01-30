@@ -184,7 +184,7 @@ export class ProjectdetailComponent implements OnInit {
 
   prjDefectSelected(){
     console.log('prjRQSelected');
-    this.prjDefectComponent.test();
+    this.prjDefectComponent.initData();
   }
 
   prjTaskSelected(){
