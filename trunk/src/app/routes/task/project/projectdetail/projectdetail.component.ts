@@ -45,17 +45,6 @@ export class ProjectdetailComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    // this.route.paramMap.subscribe(
-    //   (params: ParamMap) =>{
-    //     let id = params.get('id');
-    //     this.prjProxy.getProjectById(Number(id)).subscribe(
-    //       (data)=>{
-    //         this.prjDataService.projectDetail= data;
-    //         console.log(this.projectDetail);
-    //       }
-    //       );
-        
-    //   });
     this.route.paramMap.subscribe(
       (params: ParamMap) =>{
         this.prjId = Number(params.get('id'));
@@ -171,16 +160,6 @@ export class ProjectdetailComponent implements OnInit {
         }
       });
   }
-
-  // CreateProjectRequirement() {
-  //   this.modal
-  //     .static(CreatePrjReqComponent, {inputPara:this.projectDetail})
-  //     .subscribe((res) => {
-  //       if (res){
-  //         this.initData();
-  //       }
-  //     });
-  // }
 
   prjDefectSelected(){
     console.log('prjRQSelected');

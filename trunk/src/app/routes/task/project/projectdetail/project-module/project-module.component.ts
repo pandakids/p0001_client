@@ -28,9 +28,8 @@ import { PrjReqComponent } from '../project-req/project-req';
           {
             text: '需求',
             type: 'modal',
-            modal: {
-              component: PrjReqComponent,
-            },
+            paramName: 'inputData',
+            component: PrjReqComponent,
             click: (record: any, modal: any) =>
               // this.message.success(
               //   `重新加载页面，回传值：${JSON.stringify(modal)}`,
