@@ -1,6 +1,6 @@
 <page-header [title]="projectDetail?.projectMainDto?.code">
   <ng-template #logo>
-    <img src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png">??
+    <img src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png">
   </ng-template>
   <ng-template #action>
     <nz-button-group>
@@ -27,11 +27,11 @@
     <div nz-row>
       <div nz-col nzXs="24" nzSm="12">
         <p class="text-grey">状态</p>
-        <p class="text-lg">待审批??</p>
+        <p class="text-lg">{{projectDetail?.projectMainDto?.projectStatus}}</p>
       </div>
       <div nz-col nzXs="24" nzSm="12">
         <p class="text-grey">金额(单位：元)</p>
-        <p class="text-lg">¥ ??</p>
+        <p class="text-lg">{{projectDetail?.projectMainDto?.gongfen}}</p>
       </div>
     </div>
   </ng-template>
@@ -43,7 +43,7 @@
           <nz-steps [nzCurrent]="1" nzProgressDot>
             <nz-step [nzTitle]="'创建项目'" [nzDescription]="createDesc">
               <ng-template #createDesc>
-                <div class="desc">
+                <div *ngIf='false' class="desc">
                   <div class="my-sm">??
                     <i class="anticon anticon-dingding-o ml-sm"></i>
                   </div>
@@ -53,7 +53,7 @@
             </nz-step>
             <nz-step [nzTitle]="'部门初审'" [nzDescription]="checkedDesc">
               <ng-template #checkedDesc>
-                <div class="desc">
+                <div *ngIf='false' class="desc">
                   <div class="my-sm">??
                     <i class="anticon anticon-dingding-o ml-sm" style="color: #00a0e9;"></i>
                   </div>
@@ -69,6 +69,12 @@
           <div class="steps-content"></div>
         </nz-card>        
       </nz-tab>
+      <nz-tab (nzClick)="prjTaskSelected()" nzTitle="项目任务">
+          <prj-task [prjId]="prjId" #prjTask></prj-task>
+      </nz-tab>
+        <nz-tab (nzClick)="prjDefectSelected()" nzTitle="项目defect">
+            <prj-defect #prjDefect></prj-defect>
+        </nz-tab>
       <nz-tab nzTitle="项目资产策略">
         <prj-asset-strategy></prj-asset-strategy>
       </nz-tab>
@@ -96,13 +102,13 @@
     </nz-tabset>
   </ng-template>
   <sv-container size="small" col="2">
-    <sv label="创建人">??</sv>
-    <sv label="当前版本">??</sv>
-    <sv label="创建时间">??</sv>
-    <sv label="关联项目">
+    <sv label="创建人">{{projectDetail?.projectMainDto?.creator}}</sv>
+    <sv *ngIf="false" label="当前版本">??</sv>
+    <sv label="创建时间">{{projectDetail?.projectMainDto?.creationTime|date:'yyyy MM LL'}}</sv>
+    <sv *ngIf="false" label="关联项目">
       <a (click)="msg.success('yes')">??</a>
     </sv>
-    <sv label="生效日期">?? ~ ??</sv>
-    <sv label="备注">??</sv>
+    <sv label="生效日期">{{projectDetail?.projectMainDto?.startTime|date:'yyyy MM LL'}}</sv>
+    <sv label="备注">{{projectDetail?.projectMainDto?.remarks}}</sv>
   </sv-container>
 </page-header>

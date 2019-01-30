@@ -32,11 +32,16 @@ import { CreatePrjVersionComponent } from './project/projectdetail/project-versi
 import { CreateProjectIncomeComponent } from './project/projectdetail/project-income/create-project-income.component';
 import { CreateProjectCostComponent } from './project/projectdetail/project-cost/create-project-cost.component';
 import { CreateProjecetModuleComponent } from './project/projectdetail/project-module/create-project-module.component';
+import { PrjReqComponent } from './project/projectdetail/project-req/project-req';
+import { CreatePrjReqComponent } from './project/projectdetail/project-req/create-prj-req.component';
 // 异步校验指令
 import { AsyncValidateDirective } from './user/stepregister/directives/asyncvalidate.directive';
 import { EditProjectTaskComponent } from './project/tasklist/edit-project-task.component';
 import { DefectListComponent } from './project/tasklist/defect/defect-list.component';
 import { EditTaskDefectComponent } from './project/tasklist/defect/edit-task-defect.component';
+import { PrjTaskComponent } from './project/projectdetail/project-tasks/project-task';
+import {PrjDefectComponent } from './project/projectdetail/project-defects/project-defect';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -76,7 +81,11 @@ import { EditTaskDefectComponent } from './project/tasklist/defect/edit-task-def
     CreateProjecetModuleComponent,
     EditProjectTaskComponent,
     DefectListComponent,
-    EditTaskDefectComponent
+    EditTaskDefectComponent,
+    PrjReqComponent,
+    CreatePrjReqComponent,
+    PrjTaskComponent,
+    PrjDefectComponent
   ],
   entryComponents:[JoinprojectComponent,
   addTaskComponent,
@@ -90,6 +99,8 @@ import { EditTaskDefectComponent } from './project/tasklist/defect/edit-task-def
   CreateProjecetModuleComponent,
   EditProjectTaskComponent,
   DefectListComponent,
-  EditTaskDefectComponent]
+  EditTaskDefectComponent,
+  PrjReqComponent
+]
 })
 export class TaskModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService, NzTabChangeEvent } from 'ng-zorro-antd';
 import {  ModalHelper } from '@delon/theme';
 import { STColumn } from '@delon/abc';
@@ -16,6 +16,9 @@ import { CreateProjectIncomeComponent } from './project-income/create-project-in
 import { CreateProjectCostComponent } from './project-cost/create-project-cost.component';
 import { CreateProjecetModuleComponent } from './project-module/create-project-module.component';
 import { EditTaskDefectComponent } from '../tasklist/defect/edit-task-defect.component';
+import { PrjTaskComponent } from '../projectdetail/project-tasks/project-task';
+import { PrjDefectComponent } from '../projectdetail/project-defects/project-defect';
+
 @Component({
   selector: 'projectdetail',
   templateUrl: './projectdetail.component.html',
@@ -23,12 +26,14 @@ import { EditTaskDefectComponent } from '../tasklist/defect/edit-task-defect.com
   providers: [ PrjDataService ],
 })
 export class ProjectdetailComponent implements OnInit {
-
   get projectDetail() {
     return this.prjDataService.projectDetail;
   }
 
   private prjId: any;
+
+  @ViewChild('prjDefect') prjDefectComponent: PrjDefectComponent;
+  @ViewChild('prjTask') prjTaskComponent: PrjTaskComponent;
 
   constructor(public msg: NzMessageService,
     private prjDataService:PrjDataService,
@@ -167,4 +172,22 @@ export class ProjectdetailComponent implements OnInit {
       });
   }
 
+  // CreateProjectRequirement() {
+  //   this.modal
+  //     .static(CreatePrjReqComponent, {inputPara:this.projectDetail})
+  //     .subscribe((res) => {
+  //       if (res){
+  //         this.initData();
+  //       }
+  //     });
+  // }
+
+  prjDefectSelected(){
+    console.log('prjRQSelected');
+    this.prjDefectComponent.test();
+  }
+
+  prjTaskSelected(){
+    this.prjTaskComponent.initData();
+  }
 }
