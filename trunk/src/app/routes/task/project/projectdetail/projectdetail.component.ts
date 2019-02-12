@@ -4,7 +4,10 @@ import {  ModalHelper } from '@delon/theme';
 import { STColumn } from '@delon/abc';
 import { JoinprojectComponent } from '../common/joinproject.component';
 import { addTaskComponent } from '../common/addTask.component';
-import {ProjectMainServiceProxy, ProjectRoleServiceProxy} from '@shared/service-proxies/service-proxies';
+import {ProjectMainServiceProxy, ProjectRoleServiceProxy,
+  CreateProjectTaskDefectInput,
+  ProjectTaskDefectServiceProxy
+} from '@shared/service-proxies/service-proxies';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PrjDataService } from './prj-data.service';
@@ -42,6 +45,7 @@ export class ProjectdetailComponent implements OnInit {
     private route: ActivatedRoute,
     private modal: ModalHelper,
     private prjProxy: ProjectMainServiceProxy,
+    private projectTaskDefectServiceProxy: ProjectTaskDefectServiceProxy
     ) {}
 
   ngOnInit() {
@@ -95,9 +99,24 @@ export class ProjectdetailComponent implements OnInit {
   }
 
   addDefect(){
+    let para = {
+      type: 0,
+      data: this.projectDetail
+    }
     this.modal
-      .static(EditTaskDefectComponent, {inputPara:this.projectDetail})
-      .subscribe(() => {
+      .static(EditTaskDefectComponent, {inputPara:para})
+      .subscribe((resp) => {
+        if(resp){
+          const input:CreateProjectTaskDefectInput = new CreateProjectTaskDefectInput();
+          input.name = resp.name;
+          input.remarks = resp.remarks;
+          input.gongfen = resp.gongfen;
+          input.projectMainId = this.prjId;
+          input.ownerId = resp.ownerId;
+          this.projectTaskDefectServiceProxy.createProjectTaskDefect(input)
+          .subscribe(res=>{
+          });
+        }
       });
   }
 

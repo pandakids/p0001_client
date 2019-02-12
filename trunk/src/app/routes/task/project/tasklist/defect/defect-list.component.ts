@@ -50,8 +50,12 @@ export class DefectListComponent implements OnInit {
   }
 
   addDefect(){
+    let para = {
+      type: 1,
+      data: {}
+    }
     this.modal
-          .static(EditTaskDefectComponent, {inputPara: {}})
+          .static(EditTaskDefectComponent, {inputPara: para})
           .subscribe((resp) => {
             if(resp){
               const input:CreateProjectTaskDefectInput = new CreateProjectTaskDefectInput();
@@ -79,8 +83,12 @@ export class DefectListComponent implements OnInit {
   }
 
   eidt(defect:any){
+    let para = {
+      type: 1,
+      data: defect
+    }
      this.modal
-          .static(EditTaskDefectComponent, {inputPara: defect})
+          .static(EditTaskDefectComponent, {inputPara: para})
           .subscribe((resp) => {
             if(resp){
               const input:EditProjectTaskDefectInput = new EditProjectTaskDefectInput();
