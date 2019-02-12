@@ -20,6 +20,7 @@ export class addTaskComponent implements OnInit {
 
    get projectModuleId() { return this.taskForm.get('projectModuleId'); }
    get name() { return this.taskForm.get('name'); }
+   get code() { return this.taskForm.get('code'); }
    get parentProjectTaskId() { return this.taskForm.get('parentProjectTaskId'); }
    get gongfen() { return this.taskForm.get('gongfen'); }
    get isFix() { return this.taskForm.get('isFix'); }
@@ -48,6 +49,7 @@ export class addTaskComponent implements OnInit {
     this.taskForm = this.fb.group({
       projectModuleId:['', [Validators.required]],
       name:['', [Validators.required]],
+      code:['', [Validators.required]],
       parentProjectTaskId:[''],
       gongfen:[0,[Validators.required]],
       isFix:[true, [Validators.required]],
@@ -129,6 +131,7 @@ export class addTaskComponent implements OnInit {
     input.fixUnitRate = this.fixUnitRate.value;
     input.realFixUnitRate = 0;
     input.planFinishTime = this.planFinishTime.value;
+    input.code = this.code.value;
     
     this.projectTaskServiceProxy.createProjectTask(input)
     .subscribe(
