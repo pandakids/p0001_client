@@ -50,6 +50,7 @@ import { DefectListComponent } from '../../tasklist/defect/defect-list.component
       { title: 'helper', index: 'helper'},
       {
         title: '操作',
+        fixed: 'right' , width: '100px',
         buttons: <STColumnButton[]>[
         {
           text: 'Defects',
