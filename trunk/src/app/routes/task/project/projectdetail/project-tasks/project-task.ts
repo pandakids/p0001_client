@@ -5,7 +5,7 @@ import { ModalHelper } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd';
 import { PrjDataService } from '../prj-data.service';
 import { ProjectTaskServiceProxy } from '@shared/service-proxies/service-proxies';
-
+import { DefectListComponent } from '../../tasklist/defect/defect-list.component';
 
   @Component({
     selector: 'prj-task',
@@ -48,6 +48,18 @@ import { ProjectTaskServiceProxy } from '@shared/service-proxies/service-proxies
       { title: 'projectModule', index: 'projectModule'},
       { title: 'owner', index: 'owner'},
       { title: 'helper', index: 'helper'},
+      {
+        title: '操作',
+        buttons: <STColumnButton[]>[
+        {
+          text: 'Defects',
+          type: 'modal',
+          component: DefectListComponent,
+          paramName: 'inputPara',
+          //click: this.onSaveEdit.bind(this)
+        }
+        ],
+      }
     ];
 
     constructor(

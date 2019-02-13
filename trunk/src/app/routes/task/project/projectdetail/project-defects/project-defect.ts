@@ -32,10 +32,10 @@ import { ProjectTaskDefectServiceProxy } from '@shared/service-proxies/service-p
       columns: STColumn[] = [
         { title: '名称', index: 'name'},
         { title: '工分', index: 'gongfen', type:'number'},
-        // { title: 'projectMain', index: 'projectMain'},
-        // { title: 'projectRequirement', index: 'projectRequirement'},
-        // { title: 'projectTask', index: 'projectTask'},
-        // { title: 'projectModule', index: 'projectModule'},
+        { title: 'projectMain', index: 'projectMain'},
+        { title: 'projectRequirement', index: 'projectRequirement'},
+        { title: 'projectTask', index: 'projectTask'},
+        { title: 'projectModule', index: 'projectModule'},
         { title: 'owner', index: 'owner'},
         { title: 'remarks', index: 'remarks'},
       ];
