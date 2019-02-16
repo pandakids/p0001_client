@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
-import { ProjectVersionServiceProxy,CreateProjectVersionInput
+import { ProjectVersionServiceProxy,ProjectReqTypeServiceProxy
  } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -11,20 +11,21 @@ import { ProjectVersionServiceProxy,CreateProjectVersionInput
 export class CreatePrjReqComponent implements OnInit {
   @Input() inputPara: any;
   validateForm: FormGroup;
+  prjVersions: Array<any>=[];
+  reqTypes: Array<any>=[];
 
-   get code() { return this.validateForm.get('code'); }
-   get versionName() { return this.validateForm.get('versionName'); }
+
+   get name() { return this.validateForm.get('name'); }
+   get projectModuleId() { return this.validateForm.get('projectModuleId'); }
    get remarks() { return this.validateForm.get('remarks'); }
-   get level() { return this.validateForm.get('level'); }
-   get level1() { return this.validateForm.get('level1'); }
-   get level2() { return this.validateForm.get('level2'); }
-   get level3() { return this.validateForm.get('level3'); }
-   get level4() { return this.validateForm.get('level4'); }
+   get projectReqTypeId() { return this.validateForm.get('projectReqTypeId'); }
+   get projectVersionId() { return this.validateForm.get('projectVersionId'); }
    
   constructor(private fb: FormBuilder,
     private modal: NzModalRef,
     private msg: NzMessageService,
-    private projectVersionServiceProxy: ProjectVersionServiceProxy) {
+    private projectVersionServiceProxy: ProjectVersionServiceProxy,
+    private projectReqTypeServiceProxy: ProjectReqTypeServiceProxy) {
 
   }
 
@@ -36,18 +37,30 @@ export class CreatePrjReqComponent implements OnInit {
 
   initForm(){
     this.validateForm = this.fb.group({
-      code: [ '', [ Validators.required ] ],
-      versionName   : [ '', [ Validators.required ] ],
-      remarks: [ '', [ Validators.required ] ],
-      level : [ 0, [ Validators.required] ],
-      level1 : [ 0, [ Validators.required] ],
-      level2 : [ 0, [ Validators.required] ],
-      level3 : [ 0, [ Validators.required] ],
-      level4 : [ 0, [ Validators.required] ]
+      name: [ this.inputPara.data.name, [ Validators.required ] ],
+      remarks: [ this.inputPara.data.remarks, [ Validators.required ] ],
+      projectReqTypeId : [ this.inputPara.data.projectReqTypeId, [ Validators.required] ],
+      projectVersionId : [ this.inputPara.data.projectVersionId, [ Validators.required] ],
     });
   }
 
   initData(){
+    if (this.inputPara && this.inputPara.projectMainId){
+      this.projectVersionServiceProxy.getProjectVersions(this.inputPara.projectMainId)
+    .subscribe((res)=>{
+         this.prjVersions = res.items;
+       },
+      error=>{console.log(error);},
+      ()=>{ });
+
+    this.projectReqTypeServiceProxy.getProjectReqTypes()
+    .subscribe(
+       (res)=>{
+         this.reqTypes = res.items;
+       },
+      error=>{console.log(error);},
+      ()=>{ });
+    }
   }
 
   close() {
@@ -60,18 +73,8 @@ export class CreatePrjReqComponent implements OnInit {
       this.validateForm.controls[ key ].markAsDirty();
       this.validateForm.controls[ key ].updateValueAndValidity();
     }
-    const input:CreateProjectVersionInput = value;
-    input.projectMainId = this.inputPara;
-    this.projectVersionServiceProxy.createProjectVersion(input)
-    .subscribe(
-       (res)=>{
-         this.modal.close(true);
-       },
-      error=>{
-        console.log(error);
-        this.modal.close(false);
-      },
-      ()=>{ });
+
+    this.modal.close(value); 
     
   }
 

@@ -100,7 +100,9 @@ import {PrjDefectComponent } from './project/projectdetail/project-defects/proje
   EditProjectTaskComponent,
   DefectListComponent,
   EditTaskDefectComponent,
-  PrjReqComponent
+  PrjReqComponent,
+  CreatePrjReqComponent,
+
 ]
 })
 export class TaskModule { }
