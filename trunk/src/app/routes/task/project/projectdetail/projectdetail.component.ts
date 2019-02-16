@@ -37,6 +37,7 @@ export class ProjectdetailComponent implements OnInit {
 
   @ViewChild('prjDefect') prjDefectComponent: PrjDefectComponent;
   @ViewChild('prjTask') prjTaskComponent: PrjTaskComponent;
+  currentStatus: number = 0;
 
   constructor(public msg: NzMessageService,
     private prjDataService:PrjDataService,
@@ -69,7 +70,15 @@ export class ProjectdetailComponent implements OnInit {
         });
 
         that.prjDataService.projectDetail= prjDetail;
-        console.log(prjDetail);
+        if(that.projectDetail.projectStageListDto){
+          for(let i=0; i<that.projectDetail.projectStageListDto.length;i++){
+            let s = that.projectDetail.projectStageListDto[i];
+            if (that.projectDetail.projectMainDto.projectStageId==s.sorting){
+              that.currentStatus = i;
+              break;
+            }
+          }
+        }
       },
       error=>{console.log(error)},
       ()=>{ });

@@ -65,7 +65,7 @@ import { CreatePrjReqComponent } from './create-prj-req.component';
         this.modal
       .static(CreatePrjReqComponent, { inputPara: para })
       .subscribe((data) => {
-        console.log(data);
+        //console.log(data);
         const input: CreateProjectReqInput = new CreateProjectReqInput();
         input.name = data.name;
         input.projectModuleId = this.inputData.id;
