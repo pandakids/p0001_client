@@ -32,6 +32,12 @@ export class TasklistComponent implements OnInit {
   taskListData: any[];
   totalCount: number = 0;
 
+  allTodoTaskCount: number = 0;
+  allTaskCount: number = 0;
+  allTaskMoney: number = 0;
+  allTaskGongfen: number = 0;
+  allMoney: number = 0;
+
   constructor(
     private http: _HttpClient,
     public msg: NzMessageService,
@@ -97,6 +103,11 @@ export class TasklistComponent implements OnInit {
       .subscribe(resp => {
         this.taskListData = resp.items;
         this.totalCount = resp.totalCount;
+        this.allTodoTaskCount = resp.allTodoTaskCount;
+        this.allTaskCount = resp.allTaskCount;
+        this.allTaskMoney = resp.allTaskMoney;
+        this.allTaskGongfen = resp.allTaskGongfen;
+        this.allMoney = resp.allMoney;
         this.listLoading = false;
 
          for (let i = 0; i < resp.items.length; ++i) {

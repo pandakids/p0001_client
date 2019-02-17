@@ -3,16 +3,16 @@
   <div nz-row>
     <div nz-col [nzXs]="24" [nzSm]="8" class="header-info">
       <span class="text-grey-dark">我的待办任务/完成任务总数</span>
-      <span class="d-block display-2">? / ?</span>
+      <span class="d-block display-2">{{allTodoTaskCount}} / {{allTaskCount-allTodoTaskCount}}</span>
       <em></em>
     </div>
     <div nz-col [nzXs]="24" [nzSm]="8" class="header-info">
       <span class="text-grey-dark">共获得金额/工分</span>
-      <span class="d-block display-2">￥200??/12??工分</span>
+      <span class="d-block display-2">￥{{allTaskMoney}}/{{allTaskGongfen}}工分</span>
     </div>
     <div nz-col [nzXs]="24" [nzSm]="8" class="header-info">
       <span class="text-grey-dark">预计获得</span>
-      <span class="d-block display-2">￥120???</span>
+      <span class="d-block display-2">￥{{allMoney}}</span>
     </div>
   </div>
 </nz-card>
