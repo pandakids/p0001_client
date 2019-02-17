@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <div class="modal-title">修改头像</div>
+</div>
+
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+    <nz-form-item>
+    <nz-form-label nzRequired>只能选择5mb内的JPG/JPEG/PNG图片</nz-form-label>
+    <input style="margin-bottom: 20px" type="file" ng2FileSelect [uploader]="uploader" />
+    <img id="ProfilePictureResize" [hidden]="!temporaryPictureUrl" />
+    </nz-form-item>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!valid" [nzType]="'primary'">保存</button>
+</div>
+</form>

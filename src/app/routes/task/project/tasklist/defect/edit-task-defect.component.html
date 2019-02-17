@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <div class="modal-title">添加/编辑Bug</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>defect名称</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="name" placeholder="defect名称">
+      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').hasError('required')">
+        请输入defect名称！
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+    <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>工分</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input type="number" formControlName="gongfen" placeholder="工分">
+      <nz-form-explain *ngIf="validateForm.get('gongfen').dirty && validateForm.get('gongfen').hasError('required')">
+        请输入工分！
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+<nz-form-item>
+  <nz-form-label [nzSpan]="7" nzRequired>defect详情</nz-form-label>
+  <nz-form-control [nzSpan]="12" nzHasFeedback>
+   <textarea formControlName="remarks" nz-input rows="2" placeholder="defect详情"></textarea>
+   <nz-form-explain *ngIf="validateForm.get('remarks').dirty && validateForm.get('remarks').hasError('required')">
+    请输入收入详情！
+  </nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!validateForm.valid || !validateForm.dirty" [nzType]="'primary'">保存</button>
+</div>
+</form>

@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <div class="modal-title">创建项目模块</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>编号</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="code" placeholder="编号">
+      <nz-form-explain *ngIf="validateForm.get('code').dirty && validateForm.get('code').hasError('required')">
+        请输入编号!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>模块名称</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="name" placeholder="模块名称">
+      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').hasError('required')">请输入模块名称!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>工分</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="gongfen" placeholder="工分">
+      <nz-form-explain *ngIf="validateForm.get('gongfen').dirty && validateForm.get('gongfen').hasError('required')">请输入工分!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>项目版本</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+     <nz-select formControlName="projectVersionId" nzAllowClear nzPlaceHolder="项目版本">
+        <nz-option *ngFor="let v of inputPara?.projectVersionListDto" [nzLabel]="v.versionName" [nzValue]="v.id"></nz-option>
+      </nz-select>
+     <nz-form-explain *ngIf="validateForm.get('projectVersionId').dirty && validateForm.get('projectVersionId').hasError('required')">
+      请选择项目版本！
+    </nz-form-explain>
+  </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>父级模块</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+     <nz-select formControlName="projectParentModuleId" nzAllowClear nzPlaceHolder="项目版本">
+        <nz-option *ngFor="let m of inputPara?.projectModuleListDto" [nzLabel]="m.name" [nzValue]="m.id"></nz-option>
+      </nz-select>
+     <nz-form-explain *ngIf="validateForm.get('projectParentModuleId').dirty && validateForm.get('projectParentModuleId').hasError('required')">
+      请选择父级模块！
+    </nz-form-explain>
+  </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+  <nz-form-label [nzSpan]="7" nzRequired>Remarks</nz-form-label>
+  <nz-form-control [nzSpan]="12" nzHasFeedback>
+   <textarea formControlName="remarks" nz-input rows="2" placeholder="Remarks"></textarea>
+   <nz-form-explain *ngIf="validateForm.get('remarks').dirty && validateForm.get('remarks').hasError('required')">
+    Please input your remarks!
+  </nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!validateForm.valid || !validateForm.dirty" [nzType]="'primary'">保存</button>
+</div>
+</form>

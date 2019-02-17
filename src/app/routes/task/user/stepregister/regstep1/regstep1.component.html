@@ -1,0 +1,46 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm()" se-container="1" labelWidth="100">
+  <se label="真实姓名" error="请输入真实姓名，至少2个字符以上" required>
+    <input nz-input formControlName="realName">
+  </se>
+  <se label="性别">
+    <nz-radio-group formControlName="sexy" error="请选择性别" required>
+      <label nz-radio [nzValue]="'男'">男</label>
+      <label nz-radio [nzValue]="'女'">女</label>
+      <label nz-radio [nzValue]="'未知'">未知</label>
+    </nz-radio-group>
+  </se>
+  <se label="邮箱" [error]="form.getError('email', ['email'])?.info" required>
+    <input nz-input formControlName="email" async-validate="email">
+  </se>
+  <se label="手机号" extra="务必进行手机实名" [error]="form.getError('mobilePhone', ['mobilePhone'])?.info" required>
+    <input nz-input formControlName="mobilePhone" async-validate="mobilePhone">
+  </se>
+  <se label="手机验证码" error="请输入手机验证码" required>
+    <div nz-row>
+      <div nz-col [nzSpan]="12">
+        <input nz-input formControlName="confirmCode">
+      </div>
+      <div nz-col [nzSpan]="12" style="padding-left: 15px;">
+        <button nz-button [nzLoading]="getCodeLoading" nzType="primary" [disabled]="(!form.get('mobilePhone').dirty || !form.get('mobilePhone').valid) || disabledBtn" (click)="getPhoneCode($event, form.get('mobilePhone').value)">{{getCodeBtn}}</button>
+      </div>
+    </div>
+  </se>
+  <se label="推荐人" [error]="form.getError('refereeEmail', ['refereeEmail'])?.info" required>
+    <input nz-input formControlName="refereeEmail" async-validate="refereeEmail">
+  </se>
+  <se label="信用度">
+    <label>{{userInfo?.credit}}</label>
+  </se>
+  <se>
+    <!--<button nz-button nzType="primary" [disabled]="(!form.get('mobilePhone').dirty && form.get('mobilePhone').status == 'VALID') || (!form.get('refereeEmail').dirty && form.get('refereeEmail').status == 'VALID') || form.invalid">下一步</button>-->
+    <button nz-button nzType="primary" [disabled]="form.invalid" [nzLoading]="submitLoading">下一步</button>
+  </se>
+</form>
+
+<div class="border-top-1 mt-lg px-lg text-grey-dark">
+  <h3 class="h3 my-md">说明</h3>
+  <h4 class="h4 mb-sm">推荐人</h4>
+  <p class="mb-sm">正确填写 推荐人 可以提高推荐人的信用度。</p>
+  <h4 class="h4 mb-sm">信用度</h4>
+  <p>平台主要依据个人的信用度来进行评估是否合适接收任务，信用度由系统进行评估，不能随意更改。</p>
+</div>

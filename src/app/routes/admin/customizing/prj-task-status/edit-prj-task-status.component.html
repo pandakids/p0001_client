@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <div class="modal-title">添加或编辑</div>
+</div>
+<form nz-form [formGroup]="statusForm" (ngSubmit)="onSubmit()">
+  <nz-form-item>
+  <nz-form-label nzXs="24" nzSm="7" nzRequired nzFor="code">编号</nz-form-label>
+  <nz-form-control nzXs="24" nzSm="12" nzMd="10">
+    <input nz-input formControlName="code" [(ngModel)]="inputData.code" placeholder="编号">
+    <nz-form-explain *ngIf="statusForm.get('code').dirty && statusForm.get('code').errors">请输入编号</nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzXs="24" nzSm="7" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-control nzXs="24" nzSm="12" nzMd="10">
+        <input nz-input formControlName="name" [(ngModel)]="inputData.name" placeholder="名称">
+        <nz-form-explain *ngIf="statusForm.get('name').dirty && statusForm.get('name').errors">请输入名称</nz-form-explain>
+    </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+  <nz-form-label nzXs="24" nzSm="7" nzRequired nzFor="remarks">备注</nz-form-label>
+  <nz-form-control nzXs="24" nzSm="12" nzMd="10">
+    <input nz-input formControlName="remarks" [(ngModel)]="inputData.remarks" placeholder="备注">
+    <nz-form-explain *ngIf="statusForm.get('remarks').dirty && statusForm.get('remarks').errors">请输入备注</nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button type="submit" [disabled]="statusForm.invalid" [nzType]="'primary'">保存</button>
+</div>
+</form>
+
