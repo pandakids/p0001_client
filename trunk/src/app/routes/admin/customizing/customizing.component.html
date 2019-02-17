@@ -1,0 +1,14 @@
+<nz-row [nzGutter]="24" class="py-lg">
+  <nz-col [nzSpan]="6">
+    <nz-card nzTitle="自定义配置项" class="ant-card__body-nopadding">
+      <a *ngFor="let item of items; let i = index" (click)="activeIdex=i;itemClicked(item)" class="d-block py-sm px-md" [ngClass]="{'bg-primary-light text-white':activeIdex==i}">{{item?.data?.displayName}}</a>
+    </nz-card>
+  </nz-col>
+  <nz-col [nzSpan]="18">
+    <nz-card>
+      <nz-row [nzGutter]="64" com-host>
+        <ng-template com-host></ng-template>
+      </nz-row>
+    </nz-card>
+  </nz-col>
+</nz-row>

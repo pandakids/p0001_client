@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <div class="modal-title">{{item.name != '' ? '编辑' : '添加'}}-项目角色</div>
+</div>
+<form #f="ngForm" (ngSubmit)="save()" nz-form>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">角色名称</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input nz-input [(ngModel)]="item.name" name="name" maxlength="30" required />
+    </nz-form-control>
+    <nz-form-label nzSpan="4">角色类型</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <nz-select [(ngModel)]="item.projectRoleTypeId" name="categories" required [nzAllowClear]="false">
+        <nz-option *ngFor="let cat of cats" [nzLabel]="cat.name" [nzValue]="cat.id"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button type="submit" [disabled]="!f.form.valid || !f.form.dirty" [nzLoading]="http.loading" [nzType]="'primary'">保存</button>
+  </div>
+</form>

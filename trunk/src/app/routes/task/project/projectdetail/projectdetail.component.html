@@ -1,0 +1,91 @@
+<page-header [title]="projectDetail?.projectMainDto?.code">
+  <ng-template #logo>
+    <img src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png">
+  </ng-template>
+  <ng-template #action>
+    <nz-button-group>
+      <button nz-button (click)="joinproject()">申请加入</button>
+      <button nz-button>申请退出</button>
+    </nz-button-group>
+    <nz-dropdown class="mx-sm">
+      <button nz-button nz-dropdown>
+        <i class="anticon anticon-ellipsis"></i>
+      </button>
+      <ul nz-menu>
+        <li nz-menu-item (click)="CreateProjectDailyReport()">发布公告</li>
+        <li nz-menu-item (click)="CreateServieAddress()">添加服务地址</li>
+        <li nz-menu-item (click)="CreateVersion()">添加版本</li>
+        <li nz-menu-item (click)="CreateProjectModule()">添加项目模块</li>
+        <li nz-menu-item (click)="CreateProjectIncome()">添加项目收入</li>
+        <li nz-menu-item (click)="CreateProjectCost()">添加项目支出</li>
+      </ul>
+    </nz-dropdown>
+    <button acl [acl-ability]="'Pages.Tenant.TaskSystem.ProjectMain.Create'" nz-button [nzType]="'primary'" (click)="addTask()">+任务</button>
+    <button acl [acl-ability]="'Pages.Tenant.TaskSystem.ProjectTaskDefect.Create'" nz-button [nzType]="'primary'" (click)="addDefect()">+Bug</button>
+  </ng-template>
+  <ng-template #extra>
+    <div nz-row>
+      <div nz-col nzXs="24" nzSm="12">
+        <p class="text-grey">状态</p>
+        <p class="text-lg">{{projectDetail?.projectMainDto?.projectStatus}}</p>
+      </div>
+      <div nz-col nzXs="24" nzSm="12">
+        <p class="text-grey">金额(单位：元)</p>
+        <p class="text-lg">{{projectDetail?.projectMainDto?.gongfen}}</p>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #tab>
+    <nz-tabset>
+      <nz-tab nzTitle="项目详情">
+        <!--content of this tab will be moved to a component later-->
+        <nz-card [nzBordered]="false" class="mb-lg" nzTitle="流程进度">
+          <nz-steps *ngIf="projectDetail.projectStageListDto" [nzCurrent]="currentStatus" nzProgressDot>
+            <nz-step *ngFor="let s of projectDetail.projectStageListDto" [nzTitle]="s.name">
+            </nz-step>
+          </nz-steps>
+        </nz-card>        
+      </nz-tab>
+      <nz-tab (nzClick)="prjTaskSelected()" nzTitle="项目任务">
+          <prj-task [prjId]="prjId" #prjTask></prj-task>
+      </nz-tab>
+        <nz-tab (nzClick)="prjDefectSelected()" nzTitle="项目defect">
+            <prj-defect [prjId]="prjId" #prjDefect></prj-defect>
+        </nz-tab>
+      <nz-tab nzTitle="项目资产策略">
+        <prj-asset-strategy></prj-asset-strategy>
+      </nz-tab>
+      <nz-tab nzTitle="项目参与人">
+        <prj-participant></prj-participant>
+      </nz-tab>
+      <nz-tab nzTitle="项目公告">
+        <prj-daily-report></prj-daily-report>
+      </nz-tab>
+      <nz-tab nzTitle="项目服务地址">
+        <prj-service-address></prj-service-address>
+      </nz-tab>
+      <nz-tab nzTitle="项目版本">
+        <prj-version></prj-version>
+      </nz-tab>
+      <nz-tab nzTitle="项目模块">
+        <prj-module></prj-module>
+      </nz-tab>
+      <nz-tab nzTitle="项目收入">
+        <prj-income></prj-income>
+      </nz-tab>
+      <nz-tab nzTitle="项目支出">
+        <prj-cost></prj-cost>
+      </nz-tab>
+    </nz-tabset>
+  </ng-template>
+  <sv-container size="small" col="2">
+    <sv label="创建人">{{projectDetail?.projectMainDto?.creator}}</sv>
+    <sv *ngIf="false" label="当前版本">??</sv>
+    <sv label="创建时间">{{projectDetail?.projectMainDto?.creationTime|date:'yyyy MM LL'}}</sv>
+    <sv *ngIf="false" label="关联项目">
+      <a (click)="msg.success('yes')">??</a>
+    </sv>
+    <sv label="生效日期">{{projectDetail?.projectMainDto?.startTime|date:'yyyy MM LL'}}</sv>
+    <sv label="备注">{{projectDetail?.projectMainDto?.remarks}}</sv>
+  </sv-container>
+</page-header>

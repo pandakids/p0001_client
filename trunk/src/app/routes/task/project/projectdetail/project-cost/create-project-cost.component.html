@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <div class="modal-title">发布公告</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>金额</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input type="number" nz-input formControlName="costAmount" placeholder="金额">
+      <nz-form-explain *ngIf="validateForm.get('costAmount').dirty && validateForm.get('costAmount').hasError('required')">
+        请输入金额！
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>支出简述</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="title" placeholder="收入简述">
+      <nz-form-explain *ngIf="validateForm.get('title').dirty && validateForm.get('title').hasError('required')">请输入支出简述！
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>经手人</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+     <nz-select formControlName="linkUserId" nzAllowClear nzPlaceHolder="经手人">
+        <nz-option *ngFor="let u of inputPara?.projectMainRoleListDto" [nzLabel]="u.name" [nzValue]="u.id"></nz-option>
+      </nz-select>
+     <nz-form-explain *ngIf="validateForm.get('linkUserId').dirty && validateForm.get('linkUserId').hasError('required')">
+      请选择经手人！
+    </nz-form-explain>
+  </nz-form-control>
+</nz-form-item>
+<nz-form-item>
+  <nz-form-label [nzSpan]="7" nzRequired>支出详情</nz-form-label>
+  <nz-form-control [nzSpan]="12" nzHasFeedback>
+   <textarea formControlName="remarks" nz-input rows="2" placeholder="收入详情"></textarea>
+   <nz-form-explain *ngIf="validateForm.get('remarks').dirty && validateForm.get('remarks').hasError('required')">
+    请输入支出详情！
+  </nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!validateForm.valid || !validateForm.dirty" [nzType]="'primary'">保存</button>
+</div>
+</form>

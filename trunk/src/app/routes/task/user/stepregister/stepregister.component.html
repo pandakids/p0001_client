@@ -1,0 +1,16 @@
+<page-header [title]="'资格认证'">
+  请按步骤完成认证。
+</page-header>
+
+<nz-card [nzBordered]="false">
+  <nz-steps [(nzCurrent)]="item.step">
+    <nz-step nzTitle="填写基本资料"></nz-step>
+    <nz-step nzTitle="确定平台角色"></nz-step>
+    <nz-step nzTitle="完善履历信息"></nz-step>
+    <nz-step nzTitle="完成"></nz-step>
+  </nz-steps>
+  <regstep1 *ngIf="item.step == 0"></regstep1>
+  <regstep2 *ngIf="item.step == 1"></regstep2>
+  <regstep3 *ngIf="item.step == 2"></regstep3>
+  <regstep4 *ngIf="item.step == 3"></regstep4>
+</nz-card>

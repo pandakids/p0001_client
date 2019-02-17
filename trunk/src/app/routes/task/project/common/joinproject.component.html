@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <div class="modal-title">-项目</div>
+</div>
+<form [formGroup]="joinForm" (ngSubmit)="save()" nz-form>
+  <nz-form-item class="mb-sm">
+    <nz-form-label nzSpan="4">参与角色</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <nz-select formControlName="role" [nzShowSearch]="true" [(ngModel)]="joinInput.id" [nzPlaceHolder]="'参与角色'">
+        <nz-option *ngFor="let role of roles" [nzLabel]="role.name" [nzValue]="role.id">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+    <nz-form-label nzSpan="4">申请理由</nz-form-label>
+    <nz-form-control nzSpan="8">
+      <input formControlName="reason" nz-input [(ngModel)]="joinInput.reason"  name="name" required />
+    </nz-form-control>
+  </nz-form-item>
+  <div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button [disabled]="!joinForm.valid || !joinForm.dirty" [nzType]="'primary'">保存</button>
+  </div>
+</form>

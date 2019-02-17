@@ -1,0 +1,90 @@
+{
+  "app": {
+    "name": "T客社区",
+    "description": "协同项目，释放你的潜能！"
+  },
+  "user": {
+    "name": "Admin",
+    "avatar": "./assets/tmp/img/avatar.jpg",
+    "email": "cipchk@qq.com"
+  },
+  "menu": [
+    {
+      "text": "主导航",
+      "i18n": "main_navigation",
+      "group": true,
+      "hideInBreadcrumb": true,
+      "children": [        
+        {
+          "text": "任务管理",
+          "i18n": "tasksystem",
+          "icon": "icon-speedometer",
+          "permissionName": "Pages.Tenant.TaskSystem",
+          "children": [
+            {
+              "text": "项目看板",
+              "link": "/task/project/dashboard",
+              "i18n": "project-dashboard"
+            },
+            {
+              "text": "项目列表",
+              "link": "/task/project/projectlist",
+              "permissionName": "Pages.Tenant.TaskSystem.ProjectMain",
+              "i18n": "project-list"
+            },
+            {
+              "text": "我的任务",
+              "link": "/task/project/tasklist",
+              "permissionName": "Pages.Tenant.TaskSystem.ProjectTask",
+              "i18n": "task-list"
+            }
+          ]
+        },
+        {
+          "text": "项目运营",
+          "i18n": "admin-operation",
+          "icon": "icon-speedometer",
+          "permissionName": "Pages.Tenant.TaskSystem.ProjectMain.Create",
+          "children":[
+            {
+              "text": "项目运营数据",
+              "link": "/admin/projectdashboard",
+              "permissionName": "Pages.Tenant.TaskSystem",
+              "i18n": "admin-projectdashboard"
+            },
+            {
+              "text": "项目列表",
+              "link": "/admin/projectlist",
+              "permissionName": "Pages.Tenant.TaskSystem.ProjectMain",
+              "i18n": "admin-projectlist"
+            },
+            {
+              "text": "项目角色",
+              "link": "/admin/projectroles",
+              "permissionName": "Pages.Tenant.TaskSystem.ProjectRole",
+              "i18n": "admin-projectroles"
+            },
+            {
+              "text": "项目阶段",
+              "link": "/admin/project-stage",
+              "permissionName": "Pages.Tenant.TaskSystem.ProjectStage",
+              "i18n": "project-stage"
+            },
+             {
+              "text": "投资策略",
+              "link": "/admin/project-invest",
+              "permissionName": "Pages.Tenant.TaskSystem.ProjectInvestMain",
+              "i18n": "project-invest"
+            },
+             {
+              "text": "自定义",
+              "link": "/admin/customizing",
+              "permissionName": "Pages.Tenant.TaskSystem",
+              "i18n": "customizing"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <div class="modal-title">项目需求</div>
+</div>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>名字</nz-form-label>
+    <nz-form-control [nzSpan]="20" nzHasFeedback>
+      <input nz-input formControlName="name" placeholder="名字">
+      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').hasError('required')">
+        请输入需求名字!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4">项目版本</nz-form-label>
+    <nz-form-control nzSpan="20">
+      <nz-select formControlName="projectVersionId" [nzShowSearch]="true" [nzPlaceHolder]="'版本'">
+        <nz-option *ngFor="let v of prjVersions" [nzLabel]="v.versionName" [nzValue]="v.id">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4">需求类型</nz-form-label>
+    <nz-form-control nzSpan="20">
+      <nz-select formControlName="projectReqTypeId" [nzShowSearch]="true" [nzPlaceHolder]="'需求类型'">
+        <nz-option *ngFor="let t of reqTypes" [nzLabel]="t.name" [nzValue]="t.id">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+<nz-form-item>
+  <nz-form-label [nzSpan]="4" nzRequired>Remarks</nz-form-label>
+  <nz-form-control [nzSpan]="20" nzHasFeedback>
+   <textarea formControlName="remarks" nz-input rows="2" placeholder="Remarks"></textarea>
+   <nz-form-explain *ngIf="validateForm.get('remarks').dirty && validateForm.get('remarks').hasError('required')">
+    Please input your remarks!
+  </nz-form-explain>
+</nz-form-control>
+</nz-form-item>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!validateForm.valid || !validateForm.dirty" [nzType]="'primary'">保存</button>
+</div>
+</form>
