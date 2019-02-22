@@ -13,8 +13,6 @@ import { DefectListComponent } from './defect/defect-list.component';
 })
 export class TasklistComponent implements OnInit {
 
-  // 临时使用的图片
-  // avatar: string = 'http://pic15.nipic.com/20110813/1993003_194338408124_2.jpg';
   listLoading: boolean = false;
   query: any = {
     name: undefined,
