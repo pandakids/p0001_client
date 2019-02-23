@@ -73,8 +73,8 @@ export class ProjectdetailComponent implements OnInit {
         if(that.projectDetail.projectStageListDto){
           for(let i=0; i<that.projectDetail.projectStageListDto.length;i++){
             let s = that.projectDetail.projectStageListDto[i];
-            if (that.projectDetail.projectMainDto.projectStageId==s.sorting){
-              that.currentStatus = i;
+            if (that.projectDetail.projectMainDto.projectStageId==s.id){
+              that.currentStatus = s.sorting;
               break;
             }
           }
