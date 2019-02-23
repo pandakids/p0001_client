@@ -1,8 +1,0 @@
-<nz-select (ngModelChange)="changeV($event)" [(ngModel)]="selectedOption"
-           name="projectStatusId" [nzAllowClear]="false">
-  <nz-option
-    *ngFor="let item of status"
-    [nzLabel]="item.name"
-    [nzValue]="item.id"
-    [nzDisabled]="item.isDeleted"></nz-option>
-</nz-select>
