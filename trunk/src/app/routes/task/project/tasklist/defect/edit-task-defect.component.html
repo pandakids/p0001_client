@@ -21,6 +21,15 @@
       </nz-form-explain>
     </nz-form-control>
   </nz-form-item>
+  <nz-form-item *ngIf="inputPara.type==0">
+      <nz-form-label [nzSpan]="7" nzRequired>处理人</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+          <nz-select formControlName="ownerId" [nzShowSearch]="true" [nzPlaceHolder]="'处理人'">
+              <nz-option *ngFor="let r of inputPara?.data?.projectMainRoleListDto" [nzLabel]="r.partnerName" [nzValue]="r.partnerId">
+               </nz-option>
+          </nz-select>
+    </nz-form-control>
+    </nz-form-item>
 <nz-form-item>
   <nz-form-label [nzSpan]="7" nzRequired>defect详情</nz-form-label>
   <nz-form-control [nzSpan]="12" nzHasFeedback>

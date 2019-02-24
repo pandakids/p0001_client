@@ -1,7 +1,8 @@
 <div class="alain-default__header-logo">
   <a [routerLink]="['/']" class="alain-default__header-logo-link">
-    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{settings.app.name}}" style="max-height:40px;" />
-    <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" alt="{{settings.app.name}}" style="max-height:30px;" />
+    <img class="alain-default__header-logo-expanded" src="./assets/logoinner.png" alt="{{settings.app.name}}" style="max-height:40px;" />
+    <img class="alain-default__header-logo-collapsed" src="./assets/logoinner.png" alt="{{settings.app.name}}" style="max-height:30px;" />
+    T客社区
   </a>
 </div>
 <div class="alain-default__nav-wrap">
@@ -13,28 +14,28 @@
       </div>
     </li>
     <!-- Github Page -->
-    <li>
+    <li style="display:none;">
       <a class="alain-default__nav-item" href="//github.com/ng-alain/ng-alain" target="_blank">
         <i class="anticon anticon-github"></i>
       </a>
     </li>
     <!-- Lock Page -->
-    <li class="hidden-mobile">
+    <li class="hidden-mobile" style="display:none;">
       <div class="alain-default__nav-item" [routerLink]="['/lock']">
         <i class="anticon anticon-lock"></i>
       </div>
     </li>
     <!-- Search Button -->
-    <li class="header-search__btn" (click)="searchToggleChange()">
+    <li class="header-search__btn" (click)="searchToggleChange()" style="display:none;">
       <div class="alain-default__nav-item">
         <i class="anticon anticon-search"></i>
       </div>
     </li>
   </ul>
-  <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search>
+  <header-search class="alain-default__search" [toggleChange]="searchToggleStatus" style="display:none;"></header-search>
   <ul class="alain-default__nav">
     <!-- Notify -->
-    <li>
+    <li style="display:none;">
       <header-notify></header-notify>
     </li>
     <!-- Task -->
@@ -42,7 +43,7 @@
       <header-task></header-task>
     </li>
     <!-- App Icons -->
-    <li class="hidden-mobile">
+    <li class="hidden-mobile" style="display:none;">
       <header-icon></header-icon>
     </li>
     <!-- Settings -->

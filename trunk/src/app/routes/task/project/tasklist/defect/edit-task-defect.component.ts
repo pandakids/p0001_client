@@ -14,6 +14,7 @@ export class EditTaskDefectComponent implements OnInit {
    get name() { return this.validateForm.get('name'); }
    get remarks() { return this.validateForm.get('remarks'); }
    get gongfen() { return this.validateForm.get('gongfen'); }
+   get ownerId() { return this.validateForm.get('ownerId'); }
    
   constructor(private fb: FormBuilder,
     private modal: NzModalRef,
@@ -30,9 +31,10 @@ export class EditTaskDefectComponent implements OnInit {
 
   initForm(){
     this.validateForm = this.fb.group({
-      name   : [ this.inputPara.name, [ Validators.required ] ],
-      gongfen   : [ this.inputPara.gongfen, [ Validators.required ] ],
-      remarks: [ this.inputPara.remarks, [ Validators.required ] ]
+      name   : [ this.inputPara.data.name, [ Validators.required ] ],
+      ownerId:[this.inputPara.data.ownerId],
+      gongfen   : [ this.inputPara.data.gongfen, [ Validators.required ] ],
+      remarks: [ this.inputPara.data.remarks, [ Validators.required ] ]
     });
   }
 

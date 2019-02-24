@@ -18,7 +18,7 @@
   "dashboard_monitor": "Monitor",
   "dashboard_workplace": "Workplace",
   "widgets": "Widgets",
-  "main_navigation": "Main Navigation",
+  "main_navigation": "主菜单",
   "component": "Component",
   "style": "Style",
   "gridmasonry": "Grid Masonry",
@@ -79,5 +79,5 @@
   "project-stage": "项目阶段",
   "project-invest": "投资策略",
   "admin-projectroles": "项目角色",
-  "admin-projectlist": "项目列表" 
+  "admin-projectlist": "项目列表"
 }

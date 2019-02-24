@@ -2,6 +2,14 @@
   <div class="modal-title">添加任务</div>
 </div>
 <form [formGroup]="taskForm" (ngSubmit)="save()" nz-form>
+    <nz-form-item class="mb-sm">
+        <nz-form-label [nzSpan]="4" nzRequired>编号</nz-form-label>
+        <nz-form-control [nzSpan]="20" >
+            <input nz-input  formControlName="code" required />
+            <nz-form-explain *ngIf="taskForm.get('code').dirty && taskForm.get('code').hasError('required')">请输入编号!
+              </nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
   <nz-form-item class="mb-sm">
     <nz-form-label nzSpan="4">项目版本</nz-form-label>
     <nz-form-control nzSpan="8">

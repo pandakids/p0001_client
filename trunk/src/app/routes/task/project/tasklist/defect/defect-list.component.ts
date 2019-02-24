@@ -15,6 +15,7 @@ export class DefectListComponent implements OnInit {
   query: any = {
     name: undefined,
     taskId: undefined,
+    projectMainId:undefined,
     maxResultCount: 15,
     skipCount: 0,
   };
@@ -33,14 +34,14 @@ export class DefectListComponent implements OnInit {
 
   ngOnInit() {
     this.query.taskId = this.inputPara.id;
+    this.query.projectMainId = this.inputPara.projectMainId;
     this.getData();
     console.log(this.inputPara);
   }
 
   getData() {
     this.loading = true;
-    console.log(this.inputPara);
-    this.projectTaskDefectServiceProxy.getProjectTaskDefectsWithPaging(this.query.name, this.query.taskId, this.query.maxResultCount, this.query.skipCount)
+    this.projectTaskDefectServiceProxy.getProjectTaskDefectsWithPaging(this.query.name, this.query.taskId, this.query.projectMainId,this.query.maxResultCount, this.query.skipCount)
       .subscribe(resp => {
         this.data = resp.items;
         this.totalCount = resp.totalCount;
@@ -49,8 +50,12 @@ export class DefectListComponent implements OnInit {
   }
 
   addDefect(){
+    let para = {
+      type: 1,
+      data: {}
+    }
     this.modal
-          .static(EditTaskDefectComponent, {inputPara: {}})
+          .static(EditTaskDefectComponent, {inputPara: para})
           .subscribe((resp) => {
             if(resp){
               const input:CreateProjectTaskDefectInput = new CreateProjectTaskDefectInput();
@@ -78,8 +83,12 @@ export class DefectListComponent implements OnInit {
   }
 
   eidt(defect:any){
+    let para = {
+      type: 1,
+      data: defect
+    }
      this.modal
-          .static(EditTaskDefectComponent, {inputPara: defect})
+          .static(EditTaskDefectComponent, {inputPara: para})
           .subscribe((resp) => {
             if(resp){
               const input:EditProjectTaskDefectInput = new EditProjectTaskDefectInput();

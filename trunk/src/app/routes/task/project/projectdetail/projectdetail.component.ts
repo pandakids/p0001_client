@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService, NzTabChangeEvent } from 'ng-zorro-antd';
 import {  ModalHelper } from '@delon/theme';
 import { STColumn } from '@delon/abc';
 import { JoinprojectComponent } from '../common/joinproject.component';
 import { addTaskComponent } from '../common/addTask.component';
-import {ProjectMainServiceProxy, ProjectRoleServiceProxy} from '@shared/service-proxies/service-proxies';
+import {ProjectMainServiceProxy, ProjectRoleServiceProxy,
+  CreateProjectTaskDefectInput,
+  ProjectTaskDefectServiceProxy
+} from '@shared/service-proxies/service-proxies';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { PrjDataService } from './prj-data.service';
@@ -16,6 +19,9 @@ import { CreateProjectIncomeComponent } from './project-income/create-project-in
 import { CreateProjectCostComponent } from './project-cost/create-project-cost.component';
 import { CreateProjecetModuleComponent } from './project-module/create-project-module.component';
 import { EditTaskDefectComponent } from '../tasklist/defect/edit-task-defect.component';
+import { PrjTaskComponent } from '../projectdetail/project-tasks/project-task';
+import { PrjDefectComponent } from '../projectdetail/project-defects/project-defect';
+
 @Component({
   selector: 'projectdetail',
   templateUrl: './projectdetail.component.html',
@@ -23,12 +29,15 @@ import { EditTaskDefectComponent } from '../tasklist/defect/edit-task-defect.com
   providers: [ PrjDataService ],
 })
 export class ProjectdetailComponent implements OnInit {
-
   get projectDetail() {
     return this.prjDataService.projectDetail;
   }
 
   private prjId: any;
+
+  @ViewChild('prjDefect') prjDefectComponent: PrjDefectComponent;
+  @ViewChild('prjTask') prjTaskComponent: PrjTaskComponent;
+  currentStatus: number = 0;
 
   constructor(public msg: NzMessageService,
     private prjDataService:PrjDataService,
@@ -37,20 +46,10 @@ export class ProjectdetailComponent implements OnInit {
     private route: ActivatedRoute,
     private modal: ModalHelper,
     private prjProxy: ProjectMainServiceProxy,
+    private projectTaskDefectServiceProxy: ProjectTaskDefectServiceProxy
     ) {}
 
   ngOnInit() {
-    // this.route.paramMap.subscribe(
-    //   (params: ParamMap) =>{
-    //     let id = params.get('id');
-    //     this.prjProxy.getProjectById(Number(id)).subscribe(
-    //       (data)=>{
-    //         this.prjDataService.projectDetail= data;
-    //         console.log(this.projectDetail);
-    //       }
-    //       );
-        
-    //   });
     this.route.paramMap.subscribe(
       (params: ParamMap) =>{
         this.prjId = Number(params.get('id'));
@@ -71,7 +70,15 @@ export class ProjectdetailComponent implements OnInit {
         });
 
         that.prjDataService.projectDetail= prjDetail;
-        console.log(prjDetail);
+        if(that.projectDetail.projectStageListDto){
+          for(let i=0; i<that.projectDetail.projectStageListDto.length;i++){
+            let s = that.projectDetail.projectStageListDto[i];
+            if (that.projectDetail.projectMainDto.projectStageId==s.sorting){
+              that.currentStatus = i;
+              break;
+            }
+          }
+        }
       },
       error=>{console.log(error)},
       ()=>{ });
@@ -101,9 +108,24 @@ export class ProjectdetailComponent implements OnInit {
   }
 
   addDefect(){
+    let para = {
+      type: 0,
+      data: this.projectDetail
+    }
     this.modal
-      .static(EditTaskDefectComponent, {inputPara:this.projectDetail})
-      .subscribe(() => {
+      .static(EditTaskDefectComponent, {inputPara:para})
+      .subscribe((resp) => {
+        if(resp){
+          const input:CreateProjectTaskDefectInput = new CreateProjectTaskDefectInput();
+          input.name = resp.name;
+          input.remarks = resp.remarks;
+          input.gongfen = resp.gongfen;
+          input.projectMainId = this.prjId;
+          input.ownerId = resp.ownerId;
+          this.projectTaskDefectServiceProxy.createProjectTaskDefect(input)
+          .subscribe(res=>{
+          });
+        }
       });
   }
 
@@ -167,4 +189,12 @@ export class ProjectdetailComponent implements OnInit {
       });
   }
 
+  prjDefectSelected(){
+    console.log('prjRQSelected');
+    this.prjDefectComponent.initData();
+  }
+
+  prjTaskSelected(){
+    this.prjTaskComponent.initData();
+  }
 }
