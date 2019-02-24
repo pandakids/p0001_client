@@ -18,7 +18,7 @@
   <nz-form-item class="mb-sm">
     <nz-form-label nzSpan="4">编号</nz-form-label>
     <nz-form-control nzSpan="8">
-     <label>T1001(未知字段)</label>
+     <label>{{inputPara.code}}</label>
     </nz-form-control>
     <nz-form-label nzSpan="4">标题</nz-form-label>
     <nz-form-control nzSpan="8">
@@ -55,9 +55,9 @@
     </nz-form-control>
     <nz-form-label nzSpan="4">剩余时间</nz-form-label>
     <nz-form-control nzSpan="8">
-     <label *ngIf="inputPara.taskLeftTimeSpan > 12" class="radius-sp font-color-success">{{inputPara.taskLeftTimeSpan}}小时</label>
-     <label *ngIf="inputPara.taskLeftTimeSpan <= 12 && inputPara.taskLeftTimeSpan >= 4" class="radius-sp font-color-warning">{{inputPara.taskLeftTimeSpan}}小时</label>
-     <label *ngIf="inputPara.taskLeftTimeSpan < 4" class="radius-sp font-color-error">{{inputPara.taskLeftTimeSpan}}小时</label>
+     <label *ngIf="inputPara.taskLeftTimeSpan > 12" class="radius-sp font-color-success">{{inputPara.taskLeftTimeSpan.toFixed(2)}}小时</label>
+     <label *ngIf="inputPara.taskLeftTimeSpan <= 12 && inputPara.taskLeftTimeSpan >= 4" class="radius-sp font-color-warning">{{inputPara.taskLeftTimeSpan.toFixed(2)}}小时</label>
+     <label *ngIf="inputPara.taskLeftTimeSpan < 4" class="radius-sp font-color-error">{{inputPara.taskLeftTimeSpan.toFixed(2)}}小时</label>
     </nz-form-control>
   </nz-form-item>
 
@@ -65,7 +65,7 @@
     <nz-form-label nzSpan="4">任务处理人</nz-form-label>
     <nz-form-control nzSpan="8">
       <nz-select formControlName="handleUserId">
-        <nz-option *ngFor="let it of roleList" [nzLabel]="it.name" [nzValue]="it.id"></nz-option>
+        <nz-option *ngFor="let it of roleList" [nzLabel]="it.partnerName" [nzValue]="it.partnerId"></nz-option>
       </nz-select>
     </nz-form-control>
 

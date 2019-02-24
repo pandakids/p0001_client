@@ -26,7 +26,7 @@ export class NzSelect4Component {
   ngOnInit() {
     this.proxy.getProjectStages()
       .subscribe ((data:ListResultDtoOfProjectStageListDto)=> {
-      this.stages = data.items;
+      this.stages.push({id: '', name: '不限'}, ...data.items);
     });
     this.selectedOption = this.innerValue;
   }

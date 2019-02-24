@@ -25,7 +25,8 @@ export class NzSelect2Component {
   ngOnInit() {
     this.proxy.getProjectStatuss()
       .subscribe ((data:ListResultDtoOfProjectStatusListDto)=> {
-      this.status = data.items;
+      this.status.push({id: '', name: '不限'}, ...data.items);
+      // this.status = ;
     });
     this.selectedOption = this.innerValue;
   }

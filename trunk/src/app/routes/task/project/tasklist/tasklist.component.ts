@@ -13,23 +13,15 @@ import { DefectListComponent } from './defect/defect-list.component';
 })
 export class TasklistComponent implements OnInit {
 
-  q: any = {
-    status: 'all',
-  };
-  loading = false;
-  data: any[] = [];
-
-  // 临时使用的图片
-  // avatar: string = 'http://pic15.nipic.com/20110813/1993003_194338408124_2.jpg';
   listLoading: boolean = false;
   query: any = {
     name: undefined,
     projectTaskStatusId: undefined,
     projectMainId: undefined,
     maxResultCount: 15,
-    skipCount: 0,
+    skipCount: 1,
   };
-  taskListData: any[];
+  taskData: any;
   totalCount: number = 0;
 
   constructor(
@@ -42,21 +34,6 @@ export class TasklistComponent implements OnInit {
 
   ngOnInit() {
     this.getTaskData();
-    this.getData();
-
-    // this._profileService.getProfilePicture().subscribe(result => {
-    //         if (result && result.profilePicture) {
-    //             this.avatar = 'data:image/jpeg;base64,' + result.profilePicture;
-    //         }
-    //     });
-  }
-
-  getData() {
-    this.loading = true;
-    this.http.get('/api/list', { count: 5 }).subscribe((res: any) => {
-      this.data = res;
-      this.loading = false;
-    });
   }
 
   editTask(taskId: number): void{
@@ -95,22 +72,31 @@ export class TasklistComponent implements OnInit {
     this.listLoading = true;
     this.taskProxy.getProjectTasksWithPaging(this.query.name, this.query.projectTaskStatusId, this.query.projectMainId, this.query.maxResultCount, this.query.skipCount)
       .subscribe(resp => {
-        this.taskListData = resp.items;
+        this.taskData = resp;
         this.totalCount = resp.totalCount;
         this.listLoading = false;
 
-         for (let i = 0; i < resp.items.length; ++i) {
+        for (let i = 0; i < resp.items.length; ++i) {
           let element:any = resp.items[i];
-            this.projectMainServiceProxy.getProjectLogo(element.projectMainId).subscribe(result => {
+
+          this.projectMainServiceProxy.getProjectLogo(element.projectMainId).subscribe(result => {
             if (result && result.profilePicture) {
                 element.logo = 'data:image/jpeg;base64,' + result.profilePicture;
                 if (i==resp.items.length-1){
                   //that.st.load();
                 }
             }
-        });
+          });
         }
-
       });
+  }
+
+  /** 筛选任务 */
+  onSearchTask(event: any, statusType: string): void{
+    if(statusType == 'status'){
+      this.query.name = '';
+    }
+    this.query.skipCount = 1;
+    this.getTaskData();
   }
 }

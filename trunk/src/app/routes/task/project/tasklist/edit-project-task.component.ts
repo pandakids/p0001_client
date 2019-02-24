@@ -4,7 +4,7 @@ import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 import {
   ProjectTaskServiceProxy,
   HandleProjectTaskInput,
-  ProjectRoleServiceProxy
+  ProjectMainServiceProxy,
 } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -21,7 +21,7 @@ export class EditProjectTaskComponent implements OnInit {
     private modal: NzModalRef,
     private msg: NzMessageService,
     private taskProxy: ProjectTaskServiceProxy,
-    private projectRolesProxy: ProjectRoleServiceProxy) {
+    private prjProxy: ProjectMainServiceProxy) {
   }
 
   ngOnInit() {
@@ -38,10 +38,9 @@ export class EditProjectTaskComponent implements OnInit {
   }
 
   getRoleList(){
-    this.projectRolesProxy.getProjectRoles()
+    this.prjProxy.getProjectById(this.inputPara.projectMainId)
       .subscribe(resp => {
-        this.roleList = resp.items;
-        console.log(this.roleList);
+        this.roleList = resp.projectMainRoleListDto;
       });
   }
 
