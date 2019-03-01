@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService, NzModalRef } from 'ng-zorro-antd';
 import { ProjectVersionServiceProxy,
 ProjectModuleServiceProxy,
 ProjectTaskServiceProxy,CreateProjectTaskInput,
  } from '@shared/service-proxies/service-proxies';
+import { ReqLookupComponent } from './reqLookup.component';
 
 @Component({
   selector: 'addTask',
@@ -17,6 +18,7 @@ export class addTaskComponent implements OnInit {
   tasks: any [] = [];
   prjModules: any [] = [];
   isLoading = false;
+  @ViewChild('prjReqLookup') prjReqLookup: ReqLookupComponent;
 
    get projectModuleId() { return this.taskForm.get('projectModuleId'); }
    get name() { return this.taskForm.get('name'); }
@@ -141,5 +143,12 @@ export class addTaskComponent implements OnInit {
       error=>{this.msg.error(error);},
       ()=>{});
     this.modal.close();
+  }
+  moduleChanged(event){
+    if (this.prjReqLookup.projectModuleId != event){
+      this.prjReqLookup.projectModuleId = event;
+      this.prjReqLookup.initData();
+    }
+    
   }
 }

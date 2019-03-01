@@ -20,7 +20,7 @@
     </nz-form-control>
     <nz-form-label nzSpan="4">模块</nz-form-label>
       <nz-form-control nzSpan="8">
-        <nz-select formControlName="projectModuleId" [nzShowSearch]="true" [nzPlaceHolder]="'模块'">
+        <nz-select formControlName="projectModuleId" (ngModelChange)="moduleChanged($event)" [nzShowSearch]="true" [nzPlaceHolder]="'模块'">
         <nz-option *ngFor="let m of prjModules" [nzLabel]="m.name" [nzValue]="m.id">
         </nz-option>
       </nz-select>
@@ -29,7 +29,7 @@
   <nz-form-item class="mb-sm">
     <nz-form-label nzSpan="4">需求</nz-form-label>
     <nz-form-control nzSpan="8">
-      <project-requirement-lookup [prjId]="inputPara?.projectMainDto?.id" formControlName="projectRequirementId"></project-requirement-lookup>
+      <project-requirement-lookup #prjReqLookup formControlName="projectRequirementId"></project-requirement-lookup>
     </nz-form-control>
      <nz-form-label nzSpan="4">标题</nz-form-label>
       <nz-form-control nzSpan="8">

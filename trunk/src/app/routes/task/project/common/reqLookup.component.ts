@@ -26,8 +26,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   `]
 })
 export class ReqLookupComponent implements ControlValueAccessor, OnInit {
-   @Input()  prjId; 
-  inputValue: any;
+   @Input()  projectModuleId; 
   data: any[]=[];
 
   constructor(private projectRequirementServiceProxy:ProjectRequirementServiceProxy,
@@ -42,12 +41,13 @@ export class ReqLookupComponent implements ControlValueAccessor, OnInit {
   }
 
   ngOnInit(): void {
-   this.initData();
+   //this.initData();
   }
 
   initData(){
+    this.data=[];
     forkJoin(
-        this.projectRequirementServiceProxy.getProjectRequirements(this.prjId),
+        this.projectRequirementServiceProxy.getProjectRequirements(this.projectModuleId),
         this.projectReqTypeServiceProxy.getProjectReqTypes()
         )
       .subscribe(([res1, res2])=>{
