@@ -148,6 +148,8 @@ export class addTaskComponent implements OnInit {
     if (this.prjReqLookup.projectModuleId != event){
       this.prjReqLookup.projectModuleId = event;
       this.prjReqLookup.initData();
+      this.prjReqLookup.writeValue('');
+      //this.this
     }
     
   }

@@ -28,7 +28,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ReqLookupComponent implements ControlValueAccessor, OnInit {
    @Input()  projectModuleId; 
   data: any[]=[];
-
+  inputValue: any;
   constructor(private projectRequirementServiceProxy:ProjectRequirementServiceProxy,
     private projectReqTypeServiceProxy: ProjectReqTypeServiceProxy,
     ){
@@ -70,6 +70,9 @@ export class ReqLookupComponent implements ControlValueAccessor, OnInit {
   }
 
     writeValue(value: any) {
+      this.inputValue = value;
+      this.propagateChange(value)
+
     }
 
     registerOnChange(fn: (_: any) => void): void {
