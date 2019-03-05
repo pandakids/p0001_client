@@ -110,4 +110,9 @@ export class TasklistComponent implements OnInit {
     this.query.skipCount = 0;
     this.getTaskData();
   }
+
+  onSearchTask1(): void{
+    this.query.skipCount = 0;
+    this.getTaskData();
+  }
 }
