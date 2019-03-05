@@ -19,7 +19,7 @@ export class TasklistComponent implements OnInit {
     projectTaskStatusId: undefined,
     projectMainId: undefined,
     maxResultCount: 15,
-    skipCount: 1,
+    skipCount: 0,
   };
   taskData: any;
   totalCount: number = 0;
@@ -107,7 +107,7 @@ export class TasklistComponent implements OnInit {
     if(statusType == 'status'){
       this.query.name = '';
     }
-    this.query.skipCount = 1;
+    this.query.skipCount = 0;
     this.getTaskData();
   }
 }
